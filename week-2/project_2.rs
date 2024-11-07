@@ -18,8 +18,8 @@ fn main() {
     // Calculate the average sales per item
     let average_sales = total_sales / total_quantity;
 
-    println!("Total sales: ${}", total_sales);
-    println!("Average sales per item: ${}", average_sales);
+    println!("Total sales: {}", total_sales);
+    println!("Average sales per item: {}", average_sales);
 }
 
 
