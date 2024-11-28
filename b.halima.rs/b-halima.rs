@@ -9,7 +9,6 @@ fn main() {
     for i in 0..sibling_count {
         println!("\nEntering information for sibling {}:", i + 1);
 
-        // Get sibling’s name
         println!("Enter siblings name:");
         let mut name = String::new();
         io::stdin().read_line(&mut name).expect("Failed to read input.");
@@ -39,16 +38,24 @@ fn main() {
         let mut number_of_children = 0;
         let mut employment_status = String::new();
         let mut university_name = String::new();
-        let mut job_status = String::new();
-        let mut company_name = String::new();
         let mut course_of_study = String::new();
         let mut year_of_study = 0;
         let mut studying_abroad = false;
         let mut study_country = String::new();
         let mut children_info = Vec::new();
+        let mut partner_name = String::new();
+        let mut relationship_years = 0;
+        let mut live_together = false;
+        let mut live_city = String::new();
+        let mut completed_waec = false;
+        let mut secondary_school = String::new();
+        let mut final_grade = String::new();
+        let mut current_grade = String::new();
+        let mut planning_waec = false;
+        let mut waec_year = 0;
 
         if age >= 18 {
-            println!("Is your sibling married/single/ in a relationship?");
+            println!("Is your sibling married/single/in a relationship?");
             io::stdin().read_line(&mut marital_status).expect("Failed to read input.");
             marital_status = marital_status.trim().to_string();
 
@@ -108,27 +115,58 @@ fn main() {
                         io::stdin().read_line(&mut study_country).expect("Failed to read input.");
                         study_country = study_country.trim().to_string();
                     }
-                } else if employment_status.eq_ignore_ascii_case("employed") {
-                    println!("Is the job onsite/remote?");
-                    io::stdin().read_line(&mut job_status).expect("Failed to read input.");
-                    job_status = job_status.trim().to_string();
+                }
+            } else if marital_status.eq_ignore_ascii_case("in a relationship") {
+                println!("Enter their partner's name:");
+                io::stdin().read_line(&mut partner_name).expect("Failed to read input.");
+                partner_name = partner_name.trim().to_string();
 
-                    if job_status.eq_ignore_ascii_case("onsite") {
-                        println!("What is the companys name");
-                        let mut company_name = String::new();
-                        io::stdin().read_line(&mut company_name).expect("Failed to read input.");
-                        company_name = company_name.trim().to_string();
+                println!("How many years have they been dating?");
+                let mut years_input = String::new();
+                io::stdin().read_line(&mut years_input).expect("Failed to read input.");
+                relationship_years = years_input.trim().parse().expect("Please enter a valid number.");
 
-                        println!("What is the job title");
-                        let mut job_title = String::new();
-                        io::stdin().read_line(&mut job_title).expect("Failed to read input.");
-                        job_title = job_title.trim().to_string();
+                println!("Do they live together? (yes/no)");
+                let mut live_input = String::new();
+                io::stdin().read_line(&mut live_input).expect("Failed to read input.");
+                live_together = live_input.trim().eq_ignore_ascii_case("yes");
 
-                        println!("What is the industry sector");
-                        let mut industry_sector = String::new();
-                        io::stdin().read_line(&mut industry_sector).expect("Failed to read input.");
-                        industry_sector = industry_sector.trim().to_string();
-                } 
+                if live_together {
+                    println!("Enter the city they live in together:");
+                    io::stdin().read_line(&mut live_city).expect("Failed to read input.");
+                    live_city = live_city.trim().to_string();
+                }
+            }
+        } else {
+            println!("Have they completed WAEC? (yes/no)");
+            let mut waec_input = String::new();
+            io::stdin().read_line(&mut waec_input).expect("Failed to read input.");
+            completed_waec = waec_input.trim().eq_ignore_ascii_case("yes");
+
+            if completed_waec {
+                println!("Enter the name of their secondary school:");
+                io::stdin().read_line(&mut secondary_school).expect("Failed to read input.");
+                secondary_school = secondary_school.trim().to_string();
+
+                println!("Enter their final grade:");
+                io::stdin().read_line(&mut final_grade).expect("Failed to read input.");
+                final_grade = final_grade.trim().to_string();
+            } else {
+                println!("What grade are they currently in?");
+                io::stdin().read_line(&mut current_grade).expect("Failed to read input.");
+                current_grade = current_grade.trim().to_string();
+
+                println!("Are they planning to take WAEC soon? (yes/no)");
+                let mut planning_input = String::new();
+                io::stdin().read_line(&mut planning_input).expect("Failed to read input.");
+                planning_waec = planning_input.trim().eq_ignore_ascii_case("yes");
+
+                if planning_waec {
+                    println!("What year are they planning to take WAEC?");
+                    let mut waec_year_input = String::new();
+                    io::stdin().read_line(&mut waec_year_input).expect("Failed to read input.");
+                    waec_year = waec_year_input.trim().parse().expect("Please enter a valid year.");
+                }
             }
         }
 
@@ -161,12 +199,9 @@ fn main() {
                 } else {
                     println!("Studying in Home Country");
                 }
-            } else if marital_status.eq_ignore_ascii_case("single") {
-                println!("Employment/Student Status: {}", employment_status);
-            }
-        }
-        println!("-------------------------------------\n");
-    }
-
-    println!("All sibling information has been processed.");
-}
+            } else if marital_status.eq_ignore_ascii_case("in a relationship") {
+                println!("Partners Name: {}", partner_name);
+                println!("Years of Relationship: {}", relationship_years);
+                if live_together {
+                    println!("Living Together in: {}", live_city);
+               
