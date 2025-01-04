@@ -1,0 +1,7 @@
+PAU SMIS
+Student Name	Matric. Number	Department	Level
+Oluchi Nnordi	ACC1021111	Accounting	300
+Adams Aliyu	ECO1010101	Economics	200
+Sohma Bolade	CSC1028828	Computer Science	400
+Adekunele Gold	EEE1020220	Electrical Eng.	500
+Bianca Edemoh	MEE1020201	Mechanical Eng.	300
